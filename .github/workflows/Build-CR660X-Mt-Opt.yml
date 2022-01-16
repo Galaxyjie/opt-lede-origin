@@ -23,11 +23,11 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   #MTdrive
-  #TARGET: MT7915_7621-MT_WIFI-Openwrt/target
-  RAMIPS: MT7915_7621-MT_WIFI-Openwrt/target/linux/ramips
-  LUCI_APP_MTWIFI: MT7915_7621-MT_WIFI-Openwrt/luci-app-mtwifi
-  NATFLOW: MT7915_7621-MT_WIFI-Openwrt/natflow
-  NETWORK: MT7915_7621-MT_WIFI-Openwrt/network
+  #TARGET: MTDriver/target
+  RAMIPS: MTDriver/target/linux/ramips
+  LUCI_APP_MTWIFI: MTDriver/luci-app-mtwifi
+  NATFLOW: MTDriver/natflow
+  NETWORK: MTDriver/network
   #ledediy
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: CR660X-Mt.config
