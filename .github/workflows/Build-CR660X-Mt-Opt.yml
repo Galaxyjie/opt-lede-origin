@@ -74,8 +74,7 @@ jobs:
     - name: Clone drive code
       working-directory: /workdir
       run: |
-        df -hT $PWD
-        git clone $DRIVE_URL -b $DRIVE_BRANCH drive
+        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git drive
         ln -sf /workdir/drive $GITHUB_WORKSPACE/drive
 
     - name: Delete drive
@@ -86,10 +85,10 @@ jobs:
 
     - name: Add drive
       run: |
-        mv -f $TARGET openwrt/
-        mv -f $LUCI_APP_MTWIFI openwrt/package/
-        mv -f $NATFLOW openwrt/package/
-        mv -f $NETWORK openwrt/package/
+        mv -f drive/target openwrt/
+        mv -f driver/luci-app-mtwifi openwrt/package/
+        mv -f driver/natflow openwrt/package/
+        mv -f driver/network openwrt/package/
 
     - name: Load custom feeds
       run: |
