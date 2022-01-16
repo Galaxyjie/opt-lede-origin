@@ -79,7 +79,7 @@ jobs:
 
     - name: Delete driver
       run: |
-        rm -rf openwrt/package/lean/target
+        rm -rf openwrt/target
         rm -rf openwrt/package/lean/mt
         rm -rf openwrt/package/network
 
