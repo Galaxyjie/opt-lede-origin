@@ -63,7 +63,7 @@ jobs:
         rm -rf openwrt/package/lean/mt/drivers/mt_wifi
 
     - name: Add drive
-    run: |
+      run: |
         [ -e $TARGET ] && mv $TARGET openwrt/target
         [ -e $LUCI_APP_MTWIFI ] && mv $LUCI_APP_MTWIFI openwrt/package
         [ -e $NATFLOW ] && mv $NATFLOW openwrt/package
