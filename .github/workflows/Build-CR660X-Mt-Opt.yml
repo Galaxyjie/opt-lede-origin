@@ -1,4 +1,4 @@
-name: build-mt-opt-CR660X
+name: Build-CR660X-Mt-Opt
 
 on:
   repository_dispatch:
