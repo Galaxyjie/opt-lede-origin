@@ -23,8 +23,8 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   #MTdrive
-  #TARGET: MTDriver/target
-  RAMIPS: MTDriver/target/linux/ramips
+  TARGET: MTDriver/target
+  #RAMIPS: MTDriver/target/linux/ramips
   LUCI_APP_MTWIFI: MTDriver/luci-app-mtwifi
   NATFLOW: MTDriver/natflow
   NETWORK: MTDriver/network
@@ -70,13 +70,14 @@ jobs:
 
     - name: Delete drive
       run: |
-        rm -rf openwrt/package/lean/target/linux/ramips
+        rm -rf openwrt/package/lean/target
         rm -rf openwrt/package/lean/mt
         rm -rf openwrt/package/network
 
     - name: Add drive
       run: |
-        [ -e $RAMPIS ] && mv -f $RAMPIS openwrt/target/linux/ramips
+        [ -e $TARGET ] && mv -f $TARGET openwrt/target
+        #[ -e $RAMPIS ] && mv -f $RAMPIS openwrt/target/linux/ramips
         [ -e $LUCI_APP_MTWIFI ] && mv -f $LUCI_APP_MTWIFI openwrt/package
         [ -e $NATFLOW ] && mv -f $NATFLOW openwrt/package
         [ -e $NETWORK ] && mv -f $NETWORK openwrt/package
