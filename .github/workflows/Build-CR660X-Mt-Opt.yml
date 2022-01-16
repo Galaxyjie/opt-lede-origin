@@ -12,6 +12,12 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
+  #MTdrive
+  TARGET: MT7915_7621-MT_WIFI-Openwrt/target
+  LUCI_APP_MTWIFI: MT7915_7621-MT_WIFI-Openwrt/luci-app-mtwifi
+  NATFLOW: MT7915_7621-MT_WIFI-Openwrt/natflow
+  NETWORK: MT7915_7621-MT_WIFI-Openwrt/network
+  #ledediy
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: CR660X-Mt.config
   DIY_P1_SH: diy-part1.sh
@@ -43,18 +49,33 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+
     - name: Clone source code
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
+    - name: Delete drive
+      run: |
+        rm -rf openwrt/package/lean/mt/luci-app-mtwifi
+        rm -rf openwrt/package/lean/mt/drivers/mt_wifi
+
+    - name: Add drive
+    run: |
+        [ -e $TARGET ] && mv $TARGET openwrt/target
+        [ -e $LUCI_APP_MTWIFI ] && mv $LUCI_APP_MTWIFI openwrt/package
+        [ -e $NATFLOW ] && mv $NATFLOW openwrt/package
+        [ -e $NETWORK ] && mv $NETWORK openwrt/package
+
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+    
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
