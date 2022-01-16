@@ -22,14 +22,15 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
+  DRIVE_URL: https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt
+  DRIVE_BRANCH: main
   #MTdrive
-  TARGET: MTDriver/target
-  #[ -e $TARGET ] && mv -f $TARGET openwrt/
+  TARGET: driver/target
   #RAMIPS: MTDriver/target/linux/ramips
   #[ -e $RAMPIS ] && mv -f $RAMPIS openwrt/target/linux/ramips
-  LUCI_APP_MTWIFI: MTDriver/luci-app-mtwifi
-  NATFLOW: MTDriver/natflow
-  NETWORK: MTDriver/network
+  LUCI_APP_MTWIFI: driver/luci-app-mtwifi
+  NATFLOW: driver/natflow
+  NETWORK: driver/network
   #ledediy
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: CR660X-Mt.config
@@ -69,6 +70,13 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+    
+    - name: Clone drive code
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $DRIVE_URL -b $DRIVE_BRANCH drive
+        ln -sf /workdir/drive $GITHUB_WORKSPACE/openwrt
 
     - name: Delete drive
       run: |
@@ -78,6 +86,7 @@ jobs:
 
     - name: Add drive
       run: |
+        [ -e $TARGET ] && mv -f $TARGET openwrt/
         [ -e $LUCI_APP_MTWIFI ] && mv -f $LUCI_APP_MTWIFI openwrt/package/
         [ -e $NATFLOW ] && mv -f $NATFLOW openwrt/package/
         [ -e $NETWORK ] && mv -f $NETWORK openwrt/package/
