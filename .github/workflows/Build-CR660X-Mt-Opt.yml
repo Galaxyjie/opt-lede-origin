@@ -77,10 +77,10 @@ jobs:
 
     - name: Add drive
       run: |
-        [ -e $TARGET ] && mv -f $TARGET openwrt
-        [ -e $LUCI_APP_MTWIFI ] && mv -f $LUCI_APP_MTWIFI openwrt/package
-        [ -e $NATFLOW ] && mv -f $NATFLOW openwrt/package
-        [ -e $NETWORK ] && mv -f $NETWORK openwrt/package
+        [ -e $TARGET ] && mv -f $TARGET openwrt/
+        [ -e $LUCI_APP_MTWIFI ] && mv -f $LUCI_APP_MTWIFI openwrt/package/
+        [ -e $NATFLOW ] && mv -f $NATFLOW openwrt/package/
+        [ -e $NETWORK ] && mv -f $NETWORK openwrt/package/
 
     - name: Load custom feeds
       run: |
