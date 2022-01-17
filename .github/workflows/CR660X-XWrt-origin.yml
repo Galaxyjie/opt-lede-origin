@@ -7,6 +7,7 @@
 # https://github.com/Galaxyjie/opt-lede-origin
 # Description: Build OpenWrt using GitHub Actions
 #  [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+# [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
 
 name: CR660X-XWrt-origin 
 
@@ -63,7 +64,6 @@ jobs:
 
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
