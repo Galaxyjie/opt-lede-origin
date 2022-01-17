@@ -12,20 +12,10 @@ on:
 env:
   REPO_URL: https://github.com/x-wrt/x-wrt
   REPO_BRANCH: master
-  DRIVE_URL: https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt
-  DRIVE_BRANCH: main
-  #MTdrive
-  TARGET: MTDriver/target
-  #RAMIPS: MTDriver/target/linux/ramips
-  #[ -e $RAMPIS ] && mv -f $RAMPIS openwrt/target/linux/ramips
-  LUCI_APP_MTWIFI: MTDriver/luci-app-mtwifi
-  NATFLOW: MTDriver/natflow
-  NETWORK: MTDriver/network
-  #ledediy
-  FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: CR660X-Mt.config
-  DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: diy-part2.sh
+  FEEDS_CONF: CR660X-XWrt/MTDrive-AddLeanPackage/feeds.conf.default
+  CONFIG_FILE: CR660X-XWrt/MTDrive-AddLeanPackage/.config
+  DIY_P1_SH: CR660X-XWrt/MTDrive-AddLeanPackage/diy-part1.sh
+  DIY_P2_SH: CR660X-XWrt/MTDrive-AddLeanPackage/diy-part2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
