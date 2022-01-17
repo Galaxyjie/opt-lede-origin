@@ -6,7 +6,7 @@
 #
 # https://github.com/Galaxyjie/opt-lede-origin
 # Description: Build OpenWrt using GitHub Actions
-#
+# 
 
 name: (failed)CR660X-Mt-Opt
 
