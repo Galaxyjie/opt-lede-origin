@@ -1,4 +1,4 @@
-name: CR660X-XWrt-MTDrive-AddLeanPackage
+name: CR660X-XWrt-MTDrive
 
 on:
   repository_dispatch:
@@ -12,10 +12,10 @@ on:
 env:
   REPO_URL: https://github.com/x-wrt/x-wrt
   REPO_BRANCH: master
-  FEEDS_CONF: CR660X-XWrt/MTDrive-AddLeanPackage/feeds.conf.default
-  CONFIG_FILE: CR660X-XWrt/MTDrive-AddLeanPackage/.config
-  DIY_P1_SH: CR660X-XWrt/MTDrive-AddLeanPackage/diy-part1.sh
-  DIY_P2_SH: CR660X-XWrt/MTDrive-AddLeanPackage/diy-part2.sh
+  FEEDS_CONF: CR660X-XWrt/MTDrive/feeds.conf.default
+  CONFIG_FILE: CR660X-XWrt/MTDrive/.config
+  DIY_P1_SH: CR660X-XWrt/MTDrive/diy-part1.sh
+  DIY_P2_SH: CR660X-XWrt/MTDrive/diy-part2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
