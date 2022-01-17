@@ -1,4 +1,4 @@
-name: Build-CR660X-Origin-Xwt
+name: CR660X-XWrt-origin 
 
 on:
   repository_dispatch:
