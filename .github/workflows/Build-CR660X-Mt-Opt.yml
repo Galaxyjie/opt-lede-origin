@@ -80,7 +80,8 @@ jobs:
     - name: Delete driver
       run: |
         rm -rf openwrt/target/linux/ramips
-        rm -rf openwrt/package/lean/mt
+        rm -rf openwrt/package/lean/mt/luci-app-mtwifi
+        rm -rf openwrt/package/lean/mt/drivers/mt_wifi
         rm -rf openwrt/package/network
 
     - name: Add driver
