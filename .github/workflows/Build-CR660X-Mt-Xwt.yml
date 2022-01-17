@@ -79,14 +79,14 @@ jobs:
 
     - name: Delete driver
       run: |
-        rm -rf openwrt/target/linux/ramips
+        rm -rf openwrt/target
+        rm -rf openwrt/package/network
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
         rm -rf openwrt/package/lean/mt/drivers/mt_wifi
-        rm -rf openwrt/package/network
 
     - name: Add driver
       run: |
-        mv -f driver/target/linux/ramips openwrt/target/linux/
+        mv -f driver/target openwrt/
         mv -f driver/luci-app-mtwifi openwrt/package/
         mv -f driver/natflow openwrt/package/
         mv -f driver/network openwrt/package/
