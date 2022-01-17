@@ -56,10 +56,6 @@ jobs:
         git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
         ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
-    #- name: Use lean package
-    #  run: |
-    #    cp -rf lede/package openwrt/
-
     - name: Use MT driver
       run: |
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
