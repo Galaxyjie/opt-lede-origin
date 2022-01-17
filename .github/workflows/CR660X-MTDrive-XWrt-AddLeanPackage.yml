@@ -166,7 +166,7 @@ jobs:
         echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
     
     - name: Upload new config
-        run: mv openwrt/.config $CONFIG_FILE
+        run: mv -f openwrt/.config CR660X-XWrt/MTDrive-AddLeanPackage/.config
 
     - name: Generate release tag
       id: tag
