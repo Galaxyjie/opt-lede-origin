@@ -33,7 +33,6 @@ env:
   NETWORK: MTDriver/network
   #ledediy
   FEEDS_CONF: CR660X-Mt-Xwt.feeds.conf.default
-  CONFIG_FILE: CR660X-Mt.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: true
