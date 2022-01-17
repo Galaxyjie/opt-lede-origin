@@ -75,7 +75,7 @@ jobs:
       working-directory: /workdir
       run: |
         git clone https://github.com/coolsnowwolf/lede.git lede
-        ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
+        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
 
     - name: Add lede packages
       run: |
