@@ -1,3 +1,13 @@
+#
+# Copyright (c) 2019-2020 Galaxyjie
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/Galaxyjie/opt-lede-origin
+# Description: Build OpenWrt using GitHub Actions
+#
+
 name: CR660X-XWrt-origin 
 
 on:
