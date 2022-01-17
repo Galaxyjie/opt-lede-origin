@@ -1,13 +1,4 @@
-#
-# Copyright (c) 2019-2020 Galaxyjie
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-# https://github.com/Galaxyjie/opt-lede-origin
-# Description: Build OpenWrt using GitHub Actions
 #  [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-# [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
 
 name: CR660X-XWrt-origin 
 
@@ -64,6 +55,7 @@ jobs:
 
     - name: Load custom feeds
       run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
@@ -77,6 +69,7 @@ jobs:
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
@@ -101,8 +94,7 @@ jobs:
       id: compile
       run: |
         cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 || make -j1 V=s
+        make
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV

@@ -69,7 +69,8 @@ jobs:
 
     - name: Add lean package
       run: |
-        mv -f lede/package/lean openwrt/package
+        rm -rf openwrt/package
+        mv -f lede/package openwrt/
 
     - name: Load custom feeds
       run: |
