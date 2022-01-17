@@ -1,14 +1,4 @@
-#
-# Copyright (c) 2019-2020 Galaxyjie
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-# https://github.com/Galaxyjie/opt-lede-origin
-# Description: Build OpenWrt using GitHub Actions
-# 
-
-name: (failed)CR660X-Mt-Opt
+name: CR660X-XWrt-MTDriveXWrt-AddLeanPackage
 
 on:
   repository_dispatch:
@@ -20,7 +10,7 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/x-wrt/x-wrt
   REPO_BRANCH: master
   DRIVE_URL: https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt
   DRIVE_BRANCH: main
@@ -63,6 +53,7 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+        sudo apt install build-essential ecj fastjar file flex g++ gcc-multilib g++-multilib gawk gettext git git-core java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python3 subversion unzip wget zlib1g-dev
 
     - name: Clone source code
       working-directory: /workdir
@@ -71,7 +62,18 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     
-    - name: Clone driver code
+    - name: Clone lean code
+      working-directory: /workdir
+      run: |
+        git clone https://github.com/coolsnowwolf/lede.git lede
+        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
+
+    - name: Add lean package
+      run: |
+        rm -rf openwrt/package
+        mv -f lede/package openwrt/
+
+  - name: Clone driver code
       working-directory: /workdir
       run: |
         git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
@@ -79,14 +81,14 @@ jobs:
 
     - name: Delete driver
       run: |
-        rm -rf openwrt/target/linux/ramips
+        rm -rf openwrt/target
+        rm -rf openwrt/package/network
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
         rm -rf openwrt/package/lean/mt/drivers/mt_wifi
-        rm -rf openwrt/package/network
 
     - name: Add driver
       run: |
-        mv -f driver/target/linux/ramips openwrt/target/linux/
+        mv -f driver/target openwrt/
         mv -f driver/luci-app-mtwifi openwrt/package/
         mv -f driver/natflow openwrt/package/
         mv -f driver/network openwrt/package/
