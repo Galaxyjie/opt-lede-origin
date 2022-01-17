@@ -1,4 +1,4 @@
-name: CR660X-XWrt-MTDrive
+name: CR660X-lede-MTDrive
 
 on:
   repository_dispatch:
