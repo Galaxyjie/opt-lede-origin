@@ -14,8 +14,8 @@ on:
 env:
   REPO_URL: https://github.com/x-wrt/x-wrt
   REPO_BRANCH: master
-  FEEDS_CONF: CR660X-XWrt/origin/.config
-  CONFIG_FILE: CR660X-XWrt/origin/feeds.conf.default
+  FEEDS_CONF: CR660X-XWrt/origin/feeds.conf.default
+  CONFIG_FILE: CR660X-XWrt/origin/.config
   DIY_P1_SH: CR660X-XWrt/origin/diy-part1.sh
   DIY_P2_SH: CR660X-XWrt/origin/diy-part2.sh
   UPLOAD_BIN_DIR: true
