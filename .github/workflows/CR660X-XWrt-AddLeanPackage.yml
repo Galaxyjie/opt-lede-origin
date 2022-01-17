@@ -58,10 +58,9 @@ jobs:
         git clone https://github.com/coolsnowwolf/lede.git lede
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
 
-    - name: Add lean package
+    - name: Use lean package
       run: |
-        rm -rf openwrt/package
-        mv -f lede/package openwrt/
+        cp -rf lede/package openwrt/
 
     - name: Load custom feeds
       run: |

@@ -58,19 +58,16 @@ jobs:
 
     - name: Use lean package
       run: |
-        rm -rf openwrt/package
-        mv -f lede/package openwrt/
+        cp -rf lede/package openwrt/
 
     - name: Use MT driver
       run: |
-        rm -rf openwrt/target
-        rm -rf openwrt/package/network
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
         rm -rf openwrt/package/lean/mt/drivers/mt_wifi
-        mv -f driver/target openwrt/
-        mv -f driver/luci-app-mtwifi openwrt/package/
-        mv -f driver/natflow openwrt/package/
-        mv -f driver/network openwrt/package/
+        cp -rf driver/target openwrt/
+        cp -rf driver/luci-app-mtwifi openwrt/package/
+        cp -rf driver/natflow openwrt/package/
+        cp -rf driver/network openwrt/package/
 
     - name: Load custom feeds
       run: |
