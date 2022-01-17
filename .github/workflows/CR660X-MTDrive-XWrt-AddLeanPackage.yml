@@ -1,4 +1,4 @@
-name: CR660X-XWrt-MTDriveXWrt-AddLeanPackage
+name: CR660X-XWrt-MTDrive-AddLeanPackage
 
 on:
   repository_dispatch:
