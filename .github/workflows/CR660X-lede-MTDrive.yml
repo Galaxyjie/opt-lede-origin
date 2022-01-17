@@ -10,7 +10,7 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/x-wrt/x-wrt
+  REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: CR660X-XWrt/MTDrive/feeds.conf.default
   CONFIG_FILE: CR660X-XWrt/MTDrive/.config
@@ -43,28 +43,26 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-        sudo apt install build-essential ecj fastjar file flex g++ gcc-multilib g++-multilib gawk gettext git git-core java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python3 subversion unzip wget zlib1g-dev
-
+        
     - name: Clone source code
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        git clone https://github.com/coolsnowwolf/lede.git lede
-        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
         git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
         ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
     - name: Use MT driver
       run: |
+        rm -rf openwrt/target/linux/ramips/files
+        cp -rf driver/target/linux/ramips/files openwrt/target/linux/ramips/
+        rm -rf openwrt/package/network
+        cp -rf driver/network openwrt/package/
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
         rm -rf openwrt/package/lean/mt/drivers/mt_wifi
-        rm -rf openwrt/package/network
-        cp -rf driver/target/linux/ramips/files openwrt/target/linux/ramips/
         cp -rf driver/luci-app-mtwifi openwrt/package/
         cp -rf driver/natflow openwrt/package/
-        cp -rf driver/network openwrt/package/
 
     - name: Load custom feeds
       run: |
