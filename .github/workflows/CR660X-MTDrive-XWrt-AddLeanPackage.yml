@@ -51,23 +51,15 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-    
-    - name: Clone lean code
-      working-directory: /workdir
-      run: |
         git clone https://github.com/coolsnowwolf/lede.git lede
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
+        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
+        ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
     - name: Add lean package
       run: |
         rm -rf openwrt/package
         mv -f lede/package openwrt/
-
-  - name: Clone driver code
-      working-directory: /workdir
-      run: |
-        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
-        ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
     - name: Delete driver
       run: |
