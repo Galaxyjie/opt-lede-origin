@@ -1,4 +1,6 @@
 #        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+#        rm -rf openwrt/package/lean/mt/luci-app-mtwifi
+#        rm -rf openwrt/package/lean/mt/drivers/mt_wifi
 name: CR660X-XWrt-MTDrive
 
 on:
@@ -56,8 +58,7 @@ jobs:
         cp -rf driver/target/linux/ramips/files openwrt/target/linux/ramips/
         rm -rf openwrt/package/network
         cp -rf driver/network openwrt/package/
-        rm -rf openwrt/package/lean/mt/luci-app-mtwifi
-        rm -rf openwrt/package/lean/mt/drivers/mt_wifi
+
         cp -rf driver/luci-app-mtwifi openwrt/package/
         cp -rf driver/natflow openwrt/package/
 
