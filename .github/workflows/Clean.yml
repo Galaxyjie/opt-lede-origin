@@ -28,7 +28,12 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+    - name: Initialization environment
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
     - name: Clean
+      working-directory: /workdir
       run: |
         df -hT $PWD
         rm -rf openwrt/
