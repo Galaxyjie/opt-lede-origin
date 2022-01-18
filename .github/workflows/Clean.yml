@@ -1,10 +1,27 @@
 name: clean
 
 on:
-
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
 
 env:
-
+  REPO_URL: https://github.com/immortalwrt/immortalwrt
+  REPO_BRANCH: master
+  FEEDS_CONF: CR660X-immo/MTDrive/feeds.conf.default
+  CONFIG_FILE: CR660X-immo/MTDrive/.config
+  DIY_P1_SH: CR660X-immo/MTDrive/diy-part1.sh
+  DIY_P2_SH: CR660X-immo/MTDrive/diy-part2.sh
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: false
+  UPLOAD_WETRANSFER: false
+  UPLOAD_RELEASE: false
+  TZ: Asia/Shanghai
 
 jobs:
   build:
