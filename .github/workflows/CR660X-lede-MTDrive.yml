@@ -48,41 +48,41 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
+        git clone $REPO_URL -b $REPO_BRANCH lem
+        ln -sf /workdir/lem $GITHUB_WORKSPACE/lem
+        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-lem.git driver
         ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
     - name: Use MT driver
       run: |
-        rm -rf openwrt/target/linux/ramips/files
-        cp -rf driver/target/linux/ramips/files openwrt/target/linux/ramips/
-        rm -rf openwrt/package/network
-        cp -rf driver/network openwrt/package/
-        rm -rf openwrt/package/lean/mt/luci-app-mtwifi
-        rm -rf openwrt/package/lean/mt/drivers/mt_wifi
-        cp -rf driver/luci-app-mtwifi openwrt/package/
-        cp -rf driver/natflow openwrt/package/
+        rm -rf lem/target/linux/ramips/files
+        cp -rf driver/target/linux/ramips/files lem/target/linux/ramips/
+        rm -rf lem/package/network
+        cp -rf driver/network lem/package/
+        rm -rf lem/package/lean/mt/luci-app-mtwifi
+        rm -rf lem/package/lean/mt/drivers/mt_wifi
+        cp -rf driver/luci-app-mtwifi lem/package/
+        cp -rf driver/natflow lem/package/
 
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF lem/feeds.conf.default
         chmod +x $DIY_P1_SH
-        cd openwrt
+        cd lem
         $GITHUB_WORKSPACE/$DIY_P1_SH
     
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run: cd lem && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: cd lem && ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -e files ] && mv files lem/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lem/.config
         chmod +x $DIY_P2_SH
-        cd openwrt
+        cd lem
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: SSH connection to Actions
@@ -95,7 +95,7 @@ jobs:
     - name: Download package
       id: package
       run: |
-        cd openwrt
+        cd lem
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -104,7 +104,7 @@ jobs:
     - name: Compile the firmware
       id: compile
       run: |
-        cd openwrt
+        cd lem
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "::set-output name=status::success"
@@ -121,13 +121,13 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
+        path: lem/bin
 
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
+        cd lem/bin/targets/*/*
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
