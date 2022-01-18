@@ -56,7 +56,8 @@ jobs:
 
     - name: Use MT driver
       run: |      
-        cp -rn driver/target openwrt/
+        rm -rf openwrt/target/linux/ramips/files
+        cp -rf driver/target/linux/ramips/files openwrt/target/linux/ramips/
         rm -rf openwrt/package/network
         cp -rf driver/network openwrt/package/
         rm -rf openwrt/package/lean/mt/luci-app-mtwifi
