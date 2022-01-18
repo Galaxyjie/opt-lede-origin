@@ -42,9 +42,10 @@ jobs:
     - name: Clean
       working-directory: /workdir
       run: |
-        df -hT $PWD
+        ls
         rm -rf openwrt
-        df -hT $PWD
+        rm -rf driver
+        ls
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
