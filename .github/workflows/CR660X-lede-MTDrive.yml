@@ -50,7 +50,7 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH lem
         ln -sf /workdir/lem $GITHUB_WORKSPACE/lem
-        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-lem.git driver
+        git clone https://github.com/MeIsReallyBa/MT7915_7621-MT_WIFI-Openwrt.git driver
         ln -sf /workdir/driver $GITHUB_WORKSPACE/driver
 
     - name: Use MT driver
